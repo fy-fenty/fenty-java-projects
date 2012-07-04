@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.selectPage{
+	margin: 0 auto;
+	text-align: center;
+}
+.selectPageBtn{
+	width: 40px;
+}
+
+.selectPageTxt{
+	width: 60px;
+}
