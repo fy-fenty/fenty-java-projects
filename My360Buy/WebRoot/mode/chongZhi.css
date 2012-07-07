@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+body {
+	font-size: 12px;
+	line-height: 22px;
+	font: 12px/150% Arial,Verdana,"宋体"
+}
+
+body>form {
+	margin: 12px 0 0 8px;
+}
+
+form>div,form>label {
+	float: left;
+}
+
+form>label {
+	width: 50px;
+	text-align: right;
+}
+
+.cc {
+	padding-top: 13px;
+}
+
+div>select{
+	padding: 2px;
+}
+
+div select+span{
+	color: #CC3300;
+	font-weight: bold;
+}
+
+input[type="submit"]+span {
+	color: rgb(0,94,167);
+	display: block;
+	float: left;
+	line-height: 25px;
+	margin-left: 5px;
+}
+
+form input[type="text"] {
+	display: block;
+	margin-bottom: 1px;
+}
+
+form input[type="submit"] {
+	background: url("../img/20120112B.png") -124px -220px;
+	border: none;
+	width: 73px;
+	height: 25px;
+	float: left;
+}
+
+.cz{
+	margin-top: 10px;
+}
