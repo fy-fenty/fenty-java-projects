@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+
+lc1 {
+	background-image: url("../img/tit_regist.jpg");
+	height: 33px;
+	width: 10px;
+	display: block;
+	width: 10px;
+	position: static;
+}
+
+.llogo,.llogin {
+	width: 990px;
+	margin: 0 auto;
+	font-size: 14px;
+}
+
+.llogo>div {
+	margin: 10px 0;
+}
+
+.llogin .ltitle {
+	background-position: 0 -34px;
+	background-color: #D1D1D1;
+	background-repeat: repeat-x;
+	height: 33px;
+	width: inherit;
+}
+
+.llogin .ltitle lc1:first-child {
+	float: left;
+	background-position: 0 0;
+}
+
+.llogin .ltitle lc1 {
+	float: right;
+	background-position: 0 -68px;
+}
+
+.llogin .ltitle h8 {
+	font-weight: normal;
+	line-height: 33px;
+}
+
+.llogin .llc>div {
+	border: 1px solid #BBBBBB;
+	border-top: none;
+}
+
+.llogin .llc {
+	width: inherit;
+}
+
+.llogin form {
+	padding: 20px 40px 30px;
+}
+
+.llogin form a {
+	text-decoration: underline;
+	font-size: 12px;
+	margin-left: 20px;
+	color: #005AA0;
+}
+
+.llogin form>div {
+	height: 50px;
+	line-height: 26px;
+	margin-top: 5px;
+}
+
+.llogin form span {
+	width: 100px;
+	text-align: right;
+	float: left;
+}
+
+.llogin form input[type="text"] {
+	border: 1px solid #BBBBBB;
+	height: 26px;
+	width: 240px;
+	padding: 4px 3px;
+}
+
+.llogin form input[type="text"]:FOCUS {
+	border: 1px solid #EFA100;
+	outline: 2px solid #FFDC97;
+}
+
+.llogin form input[type="submit"] {
+	background: url("../img/new-regist.jpg") no-repeat scroll 0 -31px transparent;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+	height: 30px;
+	width: 100px;
+	border: none;
+	padding-bottom: 5px;
+}
+
+.llogin .lck {
+	height: 40px;
+}
+
+.llogin .lck label {
+	font-size: 12px;
+	height: 26px;
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+
+.llogin form input[type="checkbox"] {
+	vertical-align: text-bottom;
+	margin: 0 3px;
+}
