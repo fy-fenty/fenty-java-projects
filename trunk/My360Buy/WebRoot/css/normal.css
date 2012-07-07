@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,address,big,cite,code,del,em,font,img,ins,small,strong,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,input
+	{
+	margin: 0;
+	padding: 0;
+}
+
+.clr {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+h7,h8,h9 {
+	font-family: "microsoft yahei";
+	font-weight: bold;
+}
+
+h7 {
+	font-size: 12px;
+}
+
+h8 {
+	font-size: 14px;
+}
+
+h9 {
+	font-size: 18px;
+}
