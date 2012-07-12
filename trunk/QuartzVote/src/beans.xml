@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean id="base_dao" class="org.fengyao.daos.BaseDao" abstract="true">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="vote_dao" class="org.fengyao.daos.VoteDao" parent="base_dao">
+	</bean>
+
+	<bean id="vote_service" class="org.fengyao.services.impl.VoteService">
+		<property name="vd" ref="vote_dao"></property>
+	</bean>
+
+	<!-- <bean id="org.fengyao.web.actions.MuserAction" class="org.fengyao.web.actions.MuserAction"> -->
+	<!-- <property name="muserService" ref="muser_service"></property> -->
+	<!-- </bean> -->
+
+	<bean id="vote_inter" class="org.fengyao.aops.VoteInter">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="transaction_manager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<tx:advice id="vote_txAdvice" transaction-manager="transaction_manager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* org.fengyao.services.impl.VoteService.*(..))" id="vote_point_cut" />
+		<aop:advisor advice-ref="vote_txAdvice" pointcut-ref="vote_point_cut" />
+		<aop:advisor advice-ref="vote_inter" pointcut-ref="vote_point_cut" />
+	</aop:config>
+</beans>
