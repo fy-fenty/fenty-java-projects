@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="data_source" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>oracle.jdbc.OracleDriver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:oracle:thin:@localhost:1521:orcl</value>
+		</property>
+		<property name="user">
+			<value>QuartzVote</value>
+		</property>
+		<property name="password">
+			<value>accp2009</value>
+		</property>
+		<property name="alias">
+			<value>eomspool</value>
+		</property>
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="data_source"></property>
+		<property name="mappingResources">
+			<list>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.current_session_context_class=org.springframework.orm.hibernate3.SpringSessionContext
+				hibernate.dialect=org.fengyao.utils.MyDialect
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+			</value>
+		</property>
+	</bean>
+</beans>
