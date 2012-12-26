@@ -41,18 +41,22 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 @SuppressWarnings( { "unchecked" })
 public class XmlAndPPTToResult {
-	public static String imageName = "图片ID";
+	public static String imageKey = "图片ID";
 
 	public static void main(String[] args) throws Exception {
 		XmlAndPPTToResult t = new XmlAndPPTToResult();
-		String xlsPath = "D:\\4.xls";
-		String pptPath = "D:\\4.ppt";
-		String outPPTPath = "D:\\44.ppt";
+
+		// t.testPrintExcelValue(new String[] {
+		// "/home/fengyao/Desktop/Test/4.xls" });
+
+		String xlsPath = "/home/fengyao/Desktop/Test/4.xls";
+		String pptPath = "/home/fengyao/Desktop/Test/4.ppt";
+		String outPPTPath = "/home/fengyao/Desktop/Test/44.ppt";
 		t.createNewPPT(xlsPath, pptPath, outPPTPath);
 	}
 
 	public void testPrintExcelValue(String[] path) throws IOException {
-		for (int i = 1; i < path.length; i++) {
+		for (int i = 0; i < path.length; i++) {
 			List<List<Map>> values = this.getValuesByExcel(path[i] + "");
 			for (List<Map> listMap : values) {
 				for (Map map : listMap) {
@@ -86,9 +90,8 @@ public class XmlAndPPTToResult {
 	 */
 	public void createNewPPT(String excelPath, String pptPath, String outPath) throws IOException {
 		List<Map> excelValues = this.getValuesByExcel(excelPath).get(0);
-		String curPath = pptPath.substring(0, pptPath.lastIndexOf("\\"));
+		String curPath = pptPath.substring(0, pptPath.lastIndexOf(File.separator));
 		InputStream is = new FileInputStream(pptPath);
-		OutputStream os = new FileOutputStream(outPath);
 		SlideShow ss = new SlideShow(is);
 		Shape[] shs = ss.getSlides()[0].getShapes().clone();
 		for (Map m : excelValues) {
@@ -98,18 +101,14 @@ public class XmlAndPPTToResult {
 				if (shType == ShapeTypes.TextBox || shType == ShapeTypes.Rectangle) {
 					String text = null;
 					RichTextRun rtr = null;
-					switch (shType) {
-					case ShapeTypes.TextBox:
+					if (shType == ShapeTypes.TextBox) {
 						text = ((TextBox) sh).getText();
-						break;
-					case ShapeTypes.Rectangle:
+					} else if (shType == ShapeTypes.Rectangle) {
 						text = ((AutoShape) sh).getText();
-					default:
-						break;
 					}
 					if (text != null && text.trim().length() > 0) {
 						String tx_key = text.replaceAll("[:：]$|\\s", "");
-						if (!m.containsKey(text))
+						if (!m.containsKey(tx_key))
 							continue;
 						if (shType == ShapeTypes.TextBox) {
 							rtr = ((TextBox) sh).getTextRun().getRichTextRunAt(0);
@@ -121,7 +120,7 @@ public class XmlAndPPTToResult {
 							String key = it.next() + "";
 							String val = m.get(key) + "";
 							if (key.equals(tx_key)) {
-								if (imageName.equals(key)) {
+								if (imageKey.equals(key)) {
 									File f = new File(curPath + File.separator + val);
 									if (!f.isFile()) {
 										val += ".jpg";
@@ -147,7 +146,7 @@ public class XmlAndPPTToResult {
 										rtr_t.setFontSize(rtr.getFontSize());
 										rtr_t.setFontColor(Color.RED);
 										rtr_t.setAlignment(TextBox.AlignCenter);
-										tx_t.setText(curPath + File.separator + val + "   图片没找到:(");
+										tx_t.setText(curPath + File.separator + val + "\t图片没找到:(");
 									}
 								} else {
 									TextBox tx_t = new TextBox();
@@ -170,6 +169,7 @@ public class XmlAndPPTToResult {
 				s_n.addShape(sh);
 			}
 		}
+		OutputStream os = new FileOutputStream(outPath);
 		ss.write(os);
 		is.close();
 		os.close();
