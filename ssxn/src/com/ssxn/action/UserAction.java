@@ -33,7 +33,7 @@ public class UserAction {
 		lv = new LoginVo();
 		lv.setUname("member");
 		lv.setUpwd("AA8769CDCB26674C6706093503FF0A3");
-		List<Muser> user = muserService.findMuserByNameForLogin(lv.getUname());
+		List<Muser> user = muserService.findMuserByName(lv.getUname());
 		HttpServletRequest req = ServletActionContext.getRequest();
 		req.getSession().setAttribute(UserAction.SESSION_USER, user.get(0));
 		// if (lv == null) {

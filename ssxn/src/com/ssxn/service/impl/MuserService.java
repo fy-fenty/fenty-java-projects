@@ -36,11 +36,6 @@ public class MuserService implements IMuserService {
 		return muserDAO.find("from Muser where uname = ?", uname);
 	}
 
-	@Override
-	public List<Muser> findMuserByNameForLogin(String uname) {
-		return muserDAO.find("from Muser where uname = ?", uname);
-	}
-
 	public IMuserDAO getMuserDAO() {
 		return muserDAO;
 	}

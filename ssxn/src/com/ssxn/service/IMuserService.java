@@ -11,5 +11,4 @@ public interface IMuserService {
 
 	public List<Muser> findMuserByName(String uname);
 
-	public List<Muser> findMuserByNameForLogin(String uname);
 }
