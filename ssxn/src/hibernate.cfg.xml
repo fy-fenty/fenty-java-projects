@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	<property name="connection.url">jdbc:mysql://localhost:3306/test</property>
+	<property name="connection.username">root</property>
+	<property name="connection.password">123456</property>
+	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="myeclipse.connection.profile">ssxn</property>
+	<property name="javax.persistence.validation.mode">none</property>
+	<mapping class="com.ssxn.model.Muser" />
+	<mapping class="com.ssxn.model.Clientchoose" />
+	<mapping class="com.ssxn.model.Clientlook" />
+	<mapping class="com.ssxn.model.Clientsend" />
+	<mapping class="com.ssxn.model.Clientshoot" />
+	<mapping class="com.ssxn.model.Contact" />
+	<mapping class="com.ssxn.model.Identity" />
+	<mapping class="com.ssxn.model.Member" />
+	<mapping class="com.ssxn.model.Morder" />
+	<mapping class="com.ssxn.model.Permission" />
+	<mapping class="com.ssxn.model.Rule" />
+
+</session-factory>
+
+</hibernate-configuration>
