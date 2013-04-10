@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font: normal 12px '微软雅黑';
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	float: left;
+}
+
+a:HOVER {
+	text-decoration: underline;
+	color: red;
+}

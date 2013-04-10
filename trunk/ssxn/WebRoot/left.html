@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>无标题文档</title>
+		<link rel="stylesheet" type="text/css" href="resource/css/normal.css" />
+		<script type="text/javascript" src="resource/js/jQuery-1.6.js"></script>
+		<script type="text/javascript" src="resource/js/normal.js"></script>
+		<style type="text/css">
+			.th_head,.th_foot {
+				background-color: rgb(211,234,249);
+			}
+			.show_data td{
+				padding: 0px 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table height="100%" width="147px" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr height="23px;">
+				<td class="th_head" align="center">
+					人员管理
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+					<table class="show_data">
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_foot" align="center" height="23px;">
+					版本：2008 v1.0
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			$.ajax({
+				url:ssxn.prjName+'/user/findAll.action',
+				type : 'POST',
+				dataType : 'json',
+				success : function(data, textStatus, jqXHR) {
+					var html = '';
+					if (data['success'] === false) {
+						
+					} else {
+						if (data['result']) {
+							for (var i = 0; i < data['result'].length; i++) {
+								html += '<tr><td>';
+								html += data['result'][i]['uname'];
+								html += '</td></tr>';
+							}
+						}
+						$('.show_data').html(html);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

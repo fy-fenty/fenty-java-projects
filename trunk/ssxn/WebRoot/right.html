@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>无标题文档</title>
+		<link rel="stylesheet" type="text/css" href="resource/css/normal.css" />
+		<script type="text/javascript" src="resource/js/jQuery-1.6.js"></script>
+		<script type="text/javascript" src="resource/js/normal.js"></script>
+		<style type="text/css">
+a {
+	color: black;
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+.top_control li {
+	margin: 0 10px;
+}
+
+.top_control li:first {
+	width: 10px;
+}
+
+th {
+	background-color: #d3eaef;
+}
+
+.head_nav {
+	width: 100%;
+	float: left;
+	background-color: #a8c7ce;
+}
+
+.head_nav .cur{
+	background-color: #d3eaef;
+}
+
+.head_nav li{
+	width: 147px;
+	text-align: center;
+	line-height: 30px;
+	background-color: rgb(195, 218, 233);
+	margin: 0px 3px;
+	border: 1px solid #CCCCCC;
+	border-bottom: none;
+}
+
+.body_data{
+	background-color: #d3eaef;
+}
+
+</style>
+	</head>
+
+	<body>
+		<div class="head_nav">
+			<ul>
+				<li class="cur" type="Order">订单列表</li>
+				<li type="Shoot">拍摄记录</li>
+				<li type="Choose">选片记录</li>
+				<li type="Look">看版面记录</li>
+				<li type="Send">发件记录</li>
+				<li>当日服务</li>
+			</ul>
+		</div>
+		<div class="body_data">
+			<ul class="top_control">
+				<li>
+					<a href="javascript:">添加 </a>
+				</li>
+				<li>
+					<a href="javascript:">编辑 </a>
+				</li>
+				<li>
+					<a href="javascript:">删除 </a>
+				</li>
+			</ul>
+			<div style="clear: both;" class="show_data">
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('.head_nav li[type]').each(function(i,e){
+				$(e).click(function(){
+					switch($(this).attr('type')){
+					case 'Order':
+				 		$('.show_data').renderDate({
+			 				url : ssxn.prjName+'/product/order-findAll.action',
+			 				type : 'POST',
+			 				columns : [{
+			 					'text':'订单编号','val':'oid'
+			 				},{
+			 					'text':'客户编号','val':'uid'
+			 				}]
+			 			});
+						break;
+					case 'Shoot':
+						break;
+					case 'Choose':
+						break;
+					case 'Look':
+						break;
+					case 'Send':
+						break;
+					};
+				});
+			});
+		</script>
+	</body>
+</html>
