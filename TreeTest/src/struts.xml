@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+ 	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<package name="def" extends="struts-default" abstract="true" />
+	<package name="demo" extends="def" namespace="/menu">
+		<action name="*" class="org.demo.action.MenuAction" method="{1}">
+		</action>
+	</package>
+</struts>

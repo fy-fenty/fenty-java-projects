@@ -1,0 +1,3 @@
+var cons = {
+	prjName : '/TreeTest'	
+};
