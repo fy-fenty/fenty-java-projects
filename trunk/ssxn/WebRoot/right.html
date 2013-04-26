@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>无标题文档</title>
 		<link rel="stylesheet" type="text/css" href="resource/css/normal.css" />
+		<link rel="stylesheet" type="text/css" href="resource/css/profile.css" />
 		<script type="text/javascript" src="resource/js/jQuery-1.6.js"></script>
 		<script type="text/javascript" src="resource/js/normal.js"></script>
 		<style type="text/css">
@@ -58,55 +59,126 @@ th {
 	<body>
 		<div class="head_nav">
 			<ul>
-				<li class="cur" type="Order">订单列表</li>
-				<li type="Shoot">拍摄记录</li>
-				<li type="Choose">选片记录</li>
-				<li type="Look">看版面记录</li>
-				<li type="Send">发件记录</li>
+				<li type="order">订单列表</li>
+				<li type="shoot">拍摄记录</li>
+				<li type="choose">选片记录</li>
+				<li type="look">看版面记录</li>
+				<li type="send">发件记录</li>
 				<li>当日服务</li>
 			</ul>
 		</div>
 		<div class="body_data">
-			<ul class="top_control">
-				<li>
-					<a href="javascript:">添加 </a>
-				</li>
-				<li>
-					<a href="javascript:">编辑 </a>
-				</li>
-				<li>
-					<a href="javascript:">删除 </a>
-				</li>
-			</ul>
 			<div style="clear: both;" class="show_data">
 			</div>
 		</div>
 		<script type="text/javascript">
-			$('.head_nav li[type]').each(function(i,e){
-				$(e).click(function(){
-					switch($(this).attr('type')){
-					case 'Order':
-				 		$('.show_data').renderDate({
-			 				url : ssxn.prjName+'/product/order-findAll.action',
-			 				type : 'POST',
-			 				columns : [{
-			 					'text':'订单编号','val':'oid'
-			 				},{
-			 					'text':'客户编号','val':'uid'
-			 				}]
-			 			});
-						break;
-					case 'Shoot':
-						break;
-					case 'Choose':
-						break;
-					case 'Look':
-						break;
-					case 'Send':
-						break;
-					};
+			(function(){
+				var prevNode;
+				$('.head_nav li[type]').each(function(i,e){
+					$(e).click(function(){
+						switch($(this).attr('type')){
+						case 'order':
+					 		$('.show_data').renderDate({
+				 				url : ssxn.prjName+'/product/Order-findAll.action',
+				 				delUrl : ssxn.prjName+'/product/Order-del.action',
+				 				columns : [{
+				 					text:'客户编号',val:'uid'
+				 				},{
+				 					text:'套餐价格',val:'setMealPrice'
+				 				},{
+				 					text:'定金',val:'frontMoney'
+				 				},{
+				 					text:'定金交付日期',val:'frontMoneyDate'
+				 				},{
+				 					text:'余款',val:'spareMoney'
+				 				},{
+				 					text:'备注',val:'remark'
+				 				}],
+				 				options:{
+				 					location:'bottom',
+				 					columns:[{
+				 						text : '增加',
+				 						handler: function(){
+				 							alert('增加');
+				 						}
+				 					}]
+				 				}
+				 			});
+							break;
+						case 'shoot':
+							$('.show_data').renderDate({
+				 				url : ssxn.prjName+'/product/Shoot-findAll.action',
+				 				columns : [{
+				 					'text':'客户编号','val':'uid'
+				 				},{
+				 					'text':'拍摄日期','val':'uid'
+				 				},{
+				 					'text':'外景','val':'uid'
+				 				},{
+				 					'text':'内景','val':'uid'
+				 				},{
+				 					'text':'评分','val':'uid'
+				 				}]
+				 			});
+							break;
+						case 'choose':
+							$('.show_data').renderDate({
+				 				url : ssxn.prjName+'/product/Choose-findAll.action',
+				 				columns : [{
+				 					'text':'客户编号','val':'uid'
+				 				},{
+				 					'text':'发片日期','val':'sendDate'
+				 				},{
+				 					'text':'选片日期','val':'chooseDate'
+				 				},{
+				 					'text':'余额','val':'balance'
+				 				},{
+				 					'text':'服务评价','val':'serviceComment'
+				 				}]
+				 			});
+							break;
+						case 'look':
+							$('.show_data').renderDate({
+				 				url : ssxn.prjName+'/product/Look-findAll.action',
+				 				columns : [{
+				 					'text':'客户编号','val':'uid'
+				 				},{
+				 					'text':'发片日期','val':'sendDate'
+				 				},{
+				 					'text':'已通知看版','val':'alreadyAdvice'
+				 				},{
+				 					'text':'看版日期','val':'lookDate'
+				 				},{
+				 					'text':'改版要求','val':'changeRequire'
+				 				},]
+				 			});
+							break;
+						case 'send':
+							$('.show_data').renderDate({
+				 				url : ssxn.prjName+'/product/Send-findAll.action',
+				 				columns : [{
+				 					'text':'客户编号','val':'uid'
+				 				},{
+				 					'text':'发件日期','val':'sendDate'
+				 				},{
+				 					'text':'已确定发产品制作','val':'alreadySure'
+				 				},{
+				 					'text':'已通知顾客取件','val':'alreadyAdvice'
+				 				},{
+				 					'text':'顾客取件日期','val':'clientGetTime'
+				 				},]
+				 			});
+							break;
+						};
+						if(prevNode!=null){
+							prevNode.removeClass('cur');
+						}
+						$(e).addClass('cur');
+						prevNode = $(e);
+					});
 				});
-			});
+			})();
+			$('.head_nav li[type="order"]').click();
 		</script>
 	</body>
 </html>

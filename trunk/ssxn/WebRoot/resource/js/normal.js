@@ -112,31 +112,85 @@ var CookieUtils = {
 				}
 			}
 		}, renderDate : function(config){
+			config = config || {};
+			config['width'] = config['width'] || '100%';
+			config['type'] = config['type'] || 'POST';
 			var tar = $(this);
 			tar.html('');
 			$.ajax({
-				url : config['url'],
+				url : config['url']||'post',
 				type : config['type'],
 				dataType : 'json',
 				success : function(data, textStatus, jqXHR) {
 					var result = data['result'];
-					var table = $('<table>');
+					var table = $('<table class="x_tb">');
+					if(config['width']){
+						table.attr('width', config['width']);
+					}
 					var thead = $('<thead>').appendTo(table);
 					var tr_h = $('<tr>').appendTo(thead);
 					var tbody = $('<tbody>').appendTo(table);
 					var columns = config['columns'];
 					//添加头
 					for(var i=0;i<columns.length;i++){
-						tr_h.append('<td>'+columns[i]['text']+'</td>');
+						tr_h.append('<th>'+columns[i]['text']+'</th>');
 					}
+					//添加操作项
+					tr_h.append('<th>操作</th>');
 					//添加内容
 					for(var i=0;i<result.length;i++){
 						var tr = $('<tr>').appendTo(tbody);
 						for(var j=0;j<columns.length;j++){
 							var val = result[i][columns[j]['val']];
 							if(val){
+								switch(typeof val){
+								case 'boolean':
+									val = val ? '是' : '否';
+									break;
+								case 'object':
+									var time = val['time'];
+									if(time != undefined){
+										var date = new Date(time);
+										val = date.toLocaleDateString();
+									}
+									break;
+								}
 								tr.append('<td>'+val+'</td>');
 							}
+							if(j+1==columns.length){
+								var del_input = $('<button class="x_btn">');
+								var td = $('<td>').appendTo(tr);
+								del_input.html('删除');
+								del_input.appendTo(td);
+								del_input.click(function(){
+									alert('删除');
+								});
+								var edit_input = $('<button class="x_btn">');
+								edit_input.html('编辑');
+								edit_input.appendTo(td);
+								edit_input.click(function(){
+									alert('编辑');
+								});
+							}
+						}
+					}
+					
+					var options = config['options'];
+					if(options){
+						var tr_op = $('<div>');
+						switch (options['location']) {
+						case 'top':
+							tbody.before(tr_op);
+							break;
+						case 'bottom':
+							tbody.after(tr_op);
+							break;
+						}
+						var op_col = options['columns'];
+						for(var i=0;i<op_col.length;i++){
+							var btn = $('<button class="x_btn">').appendTo(tr_op);
+							btn.html(op_col[i]['text']);
+							btn.click(op_col[i]['handler']);
 						}
 					}
 					table.appendTo(tar);
