@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+.x_tb th {
+	text-align: left;
+	font-weight: bold;
+	height: 28px;
+}
+
+.x_tb td,.x_tb th {
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	height: 20px;
+	padding-left: 10px;
+}
+
+.x_btn{
+	padding: 3px 20px;
+	background-color: transparent;
+}

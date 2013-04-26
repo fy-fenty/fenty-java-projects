@@ -13,11 +13,16 @@ public class OrderAction {
 	private MorderService morderService;
 	private BasePageVO pv = new BasePageVO();
 
-	public String findAll() throws IOException {
+	public String findAll() {
+		System.out.println("a");
 		boolean status = true;
 		Object msg;
 		msg = morderService.findAllMorder(pv);
-		Struts2Utils.renderHtml(status, msg);
+		try {
+			Struts2Utils.renderHtml(status, msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
