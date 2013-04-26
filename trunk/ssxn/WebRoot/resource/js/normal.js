@@ -75,6 +75,8 @@ var CookieUtils = {
 				appendTo(this);
 		}, unlock: function(e){
 			e.remove();
+<<<<<<< .mine
+=======
 		}, rendTable : function(tar, config) {
 			tar.html('');
 			var columns = config['columns'];
@@ -196,6 +198,7 @@ var CookieUtils = {
 					table.appendTo(tar);
 				}
 			});
+>>>>>>> .r82
 		}
 	});
 })(jQuery);
